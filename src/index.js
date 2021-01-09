@@ -4,6 +4,9 @@ import './index.css';
 import DarkAngel from './DarkAngel.png';
 import Fallen from './Fallen.png';
 
+
+const X =<img src={DarkAngel} alt="exes"/>;
+const O = <img  src={Fallen} alt="exes"/>;
 function Square(props) {
     return (
         <button className="square" onClick={props.onClick}>
@@ -57,6 +60,10 @@ function Square(props) {
               xIsNext: true,
           };
       }
+// fucking with making sound work 
+
+
+      
 
       handleClick(i) {
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
@@ -65,7 +72,7 @@ function Square(props) {
         if (calculateWinner(squares) || squares[i]) {
             return;
         }
-        squares[i] = this.state.xIsNext ? <img src={DarkAngel} alt="exes"/> : <img src={Fallen} alt="exes"/>;
+        squares[i] = this.state.xIsNext ?   X  :  O
         this.setState({
             history: history.concat([
                 {
@@ -75,6 +82,7 @@ function Square(props) {
              stepNumber: history.length,
              xIsNext: !this.state.xIsNext
             });
+            
     }
     jumpTo(step) {
         this.setState({
@@ -82,12 +90,12 @@ function Square(props) {
             xIsNext: (step % 2) === 0,
         });
     }
-
+  
     render() {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
-
+  
         const moves = history.map((step, move) => {
             const desc = move ?
             'Go to move #' + move :
@@ -102,14 +110,15 @@ function Square(props) {
 
         let status;
         if (winner){
-            status = "VICTORY BELONGS TO: " + winner;
+            status = "VICTORY!"
         } else {
             status = "NEXT PLAYER: " + (this.state.xIsNext ? "DARK ANGELS" : "THE FALLEN");
         }
       return (
     <div className="site">
     <h1 className="title">WARHAMMER: 40,000</h1>
-    <h2 className="title">THE FURY AND THE</h2>
+    <h2 className="title">THE FURY AND THE FALLEN</h2>
+    <h3 className="sound">{this.RenderButtonSound}</h3>
     <br></br>
         <div className="game">
           <div className="game-board">
